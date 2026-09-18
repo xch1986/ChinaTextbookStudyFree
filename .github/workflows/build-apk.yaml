@@ -112,6 +112,21 @@ jobs:
                 ;;
             esac
           fi
+          # Fix Kotlin stdlib duplicate classes (kotlin-stdlib 1.8.22 vs kotlin-stdlib-jdk8 1.6.21)
+          python3 - <<'PY'
+          p = "apk/android/app/build.gradle"
+          s = open(p, encoding="utf-8").read()
+          if "configurations.all" not in s:
+              block = ("configurations.all {\n"
+                       "    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'\n"
+                       "    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'\n"
+                       "}\n\n")
+              s = s.replace("dependencies {", block + "dependencies {", 1)
+              open(p, "w", encoding="utf-8").write(s)
+              print("kotlin fix applied")
+          else:
+              print("kotlin fix already present")
+          PY
 
       - name: Generate launcher icons
         run: |
