@@ -63,8 +63,8 @@ jobs:
           mkdir -p apk/android/app/src/main/res/drawable
           echo "$SPLASH_XML_B64" | base64 -d > apk/android/app/src/main/res/drawable/splash_bg.xml
           echo "splash_bg.xml written"
-          sed -i 's|<resources>|<resources>\n    <color name="splash_color">#1565C0</color>|' apk/android/app/src/main/res/values/colors.xml
-          echo "splash_color added"
+          echo "$COLOR_PATCH_B64" | base64 -d > /tmp/patch_color.py
+          python3 /tmp/patch_color.py
           echo "$STYLES_PATCH_B64" | base64 -d > /tmp/patch_styles.py
           python3 /tmp/patch_styles.py
           echo "$KOTLIN_PATCH_B64" | base64 -d > /tmp/patch_kotlin.py
@@ -80,6 +80,8 @@ jobs:
 
           STYLES_PATCH_B64: CmltcG9ydCBzeXMKcD0nYXBrL2FuZHJvaWQvYXBwL3NyYy9tYWluL3Jlcy92YWx1ZXMvc3R5bGVzLnhtbCcKcz1vcGVuKHAsZW5jb2Rpbmc9J3V0Zi04JykucmVhZCgpCmlmICd3aW5kb3dCYWNrZ3JvdW5kJyBub3QgaW4gczoKICAgIG09JzxzdHlsZSBuYW1lPSJBcHBUaGVtZS5Ob0FjdGlvbkJhciInCiAgICBpPXMuZmluZChtKQogICAgaWYgaSE9LTE6CiAgICAgICAgaj1zLmZpbmQoJz4nLGkpKzEKICAgICAgICBzPXNbOmpdKydcbiAgICAgICAgPGl0ZW0gbmFtZT0iYW5kcm9pZDp3aW5kb3dCYWNrZ3JvdW5kIj5AZHJhd2FibGUvc3BsYXNoX2JnPC9pdGVtPicrc1tqOl0KICAgICAgICBvcGVuKHAsJ3cnLGVuY29kaW5nPSd1dGYtOCcpLndyaXRlKHMpCiAgICAgICAgcHJpbnQoJ3N0eWxlcyBwYXRjaGVkJykKZWxzZToKICAgIHByaW50KCdzdHlsZXMgYWxyZWFkeSBwYXRjaGVkJykK
           KOTLIN_PATCH_B64: CnA9J2Fway9hbmRyb2lkL2FwcC9idWlsZC5ncmFkbGUnCnM9b3BlbihwLGVuY29kaW5nPSd1dGYtOCcpLnJlYWQoKQppZiAnY29uZmlndXJhdGlvbnMuYWxsJyBub3QgaW4gczoKICAgIGI9J2NvbmZpZ3VyYXRpb25zLmFsbCB7XG4gICAgZXhjbHVkZSBncm91cDogXCdvcmcuamV0YnJhaW5zLmtvdGxpblwnLCBtb2R1bGU6IFwna290bGluLXN0ZGxpYi1qZGs4XCdcbiAgICBleGNsdWRlIGdyb3VwOiBcJ29yZy5qZXRicmFpbnMua290bGluXCcsIG1vZHVsZTogXCdrb3RsaW4tc3RkbGliLWpkazdcJ1xufVxuXG4nCiAgICBzPXMucmVwbGFjZSgnZGVwZW5kZW5jaWVzIHsnLGIrJ2RlcGVuZGVuY2llcyB7JywxKQogICAgb3BlbihwLCd3JyxlbmNvZGluZz0ndXRmLTgnKS53cml0ZShzKQogICAgcHJpbnQoJ2tvdGxpbiBmaXggYXBwbGllZCcpCmVsc2U6CiAgICBwcmludCgna290bGluIGZpeCBwcmVzZW50JykK
+
+          COLOR_PATCH_B64: CmltcG9ydCBvcwpwPSdhcGsvYW5kcm9pZC9hcHAvc3JjL21haW4vcmVzL3ZhbHVlcy9jb2xvcnMueG1sJwpkPW9zLnBhdGguZGlybmFtZShwKQpvcy5tYWtlZGlycyhkLCBleGlzdF9vaz1UcnVlKQppZiBub3Qgb3MucGF0aC5leGlzdHMocCk6CiAgICBvcGVuKHAsJ3cnLGVuY29kaW5nPSd1dGYtOCcpLndyaXRlKCc8cmVzb3VyY2VzPlxuICAgIDxjb2xvciBuYW1lPSJzcGxhc2hfY29sb3IiPiMxNTY1QzA8L2NvbG9yPlxuPC9yZXNvdXJjZXM+XG4nKQogICAgcHJpbnQoJ2NvbG9ycy54bWwgY3JlYXRlZCcpCmVsc2U6CiAgICBzPW9wZW4ocCxlbmNvZGluZz0ndXRmLTgnKS5yZWFkKCkKICAgIGlmICdzcGxhc2hfY29sb3InIG5vdCBpbiBzOgogICAgICAgIGlmICc8cmVzb3VyY2VzPicgaW4gczoKICAgICAgICAgICAgcz1zLnJlcGxhY2UoJzxyZXNvdXJjZXM+JywgJzxyZXNvdXJjZXM+XG4gICAgPGNvbG9yIG5hbWU9InNwbGFzaF9jb2xvciI+IzE1NjVDMDwvY29sb3I+JywgMSkKICAgICAgICBlbHNlOgogICAgICAgICAgICBzPSc8cmVzb3VyY2VzPlxuICAgIDxjb2xvciBuYW1lPSJzcGxhc2hfY29sb3IiPiMxNTY1QzA8L2NvbG9yPlxuPC9yZXNvdXJjZXM+XG4nICsgcwogICAgICAgIG9wZW4ocCwndycsZW5jb2Rpbmc9J3V0Zi04Jykud3JpdGUocykKICAgICAgICBwcmludCgnc3BsYXNoX2NvbG9yIGFkZGVkJykKICAgIGVsc2U6CiAgICAgICAgcHJpbnQoJ3NwbGFzaF9jb2xvciBwcmVzZW50JykK
       - name: Generate launcher icons
         run: |
           pip install pillow -q
