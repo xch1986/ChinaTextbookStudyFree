@@ -1,0 +1,32 @@
+# ---- 依赖与构建产物 ----
+node_modules
+**/node_modules
+**/.next
+**/out
+**/dist
+*.log
+npm-debug.log*
+
+# ---- 版本控制 ----
+.git
+.github
+.gitignore
+
+# ---- 本地资源与下载包（构建时由 assets 阶段重新下载）----
+**/*.zip
+**/*.tar.gz
+data/
+apps/web/public/audio
+apps/web/public/story-images
+apps/web/public/textbook-pages
+apps/web/public/data
+
+# ---- Python 数据生成管线残留 ----
+.venv
+**/__pycache__
+**/*.pyc
+.env
+
+# ---- 系统文件 ----
+Thumbs.db
+.DS_Store
