@@ -30,7 +30,7 @@ jobs:
           cd apk
           npm init -y >/dev/null
           npm install --no-audit --no-fund @capacitor/core @capacitor/android @capacitor/cli
-          npx cap init "小学全科" "com.chinastudyfree.app" --web-dir=www --no-git
+          npx cap init "小学全科" "com.chinastudyfree.app" --web-dir=www
           cat > capacitor.config.json <<'JSON'
           {
             "appId": "com.chinastudyfree.app",
