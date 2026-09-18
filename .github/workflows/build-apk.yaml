@@ -50,8 +50,9 @@ jobs:
       - name: Apply Android tweaks
         run: |
           set -e
-          MANIFEST=$(find apk/android -name AndroidManifest.xml | head -1)
+          MANIFEST=apk/android/app/src/main/AndroidManifest.xml
           echo "Manifest: $MANIFEST"
+          ls -la "$MANIFEST"
           sed -i 's|<application|<application android:usesCleartextTraffic="true"|' "$MANIFEST"
           MAINACT=$(find apk/android -name "MainActivity.kt" -o -name "MainActivity.java" | head -1)
           echo "MainActivity: $MAINACT"
