@@ -44,225 +44,55 @@ jobs:
           }
           JSON
           npx cap add android
-          echo "=== generated files ==="
-          find apk/android/app/src/main -name "MainActivity*" -o -name "styles.xml" -o -name "colors.xml" | sort
+          find apk/android -name "MainActivity*" | sort
 
       - name: Apply Android enhancements
         run: |
           set -e
-          # ===== 1. Manifest: cleartext =====
           MANIFEST=apk/android/app/src/main/AndroidManifest.xml
           sed -i 's|<application|<application android:usesCleartextTraffic="true"|' "$MANIFEST"
-
-          # ===== 2. MainActivity: fullscreen + error page + retry bridge =====
-          MAINACT=$(find apk/android -name "MainActivity.kt" -o -name "MainActivity.java" | head -1)
+          MAINACT=$(find apk/android -name "MainActivity.java" | head -1)
           echo "MainActivity: $MAINACT"
           if [ -n "$MAINACT" ]; then
-            python3 - "$MAINACT" <<'PY'
-          import sys
-          p = sys.argv[1]
-          if p.endswith('.java'):
-              content = r'''package com.chinastudyfree.app;
-
-import android.os.Bundle;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import com.getcapacitor.BridgeActivity;
-import com.getcapacitor.BridgeWebViewClient;
-
-public class MainActivity extends BridgeActivity {
-    private WebView webView;
-    private static final String HOME_URL = "http://813999.xyz:8088";
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        webView = getBridge().getWebView();
-
-        // 网络错误时显示本地错误页（带重试按钮）
-        webView.setWebViewClient(new BridgeWebViewClient(getBridge()) {
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                if (request != null && request.isForMainFrame()) {
-                    view.loadUrl("file:///android_asset/error.html");
-                }
-            }
-        });
-
-        // 错误页"重试"按钮桥
-        webView.addJavascriptInterface(new Object() {
-            @JavascriptInterface
-            public void retry() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.loadUrl(HOME_URL);
-                    }
-                });
-            }
-        }, "AndroidBridge");
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-                | android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        }
-    }
-}
-'''
-          else:
-              content = r'''package com.chinastudyfree.app;
-
-import android.os.Bundle;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import com.getcapacitor.BridgeActivity;
-import com.getcapacitor.BridgeWebViewClient;
-
-class MainActivity : BridgeActivity() {
-    private var webView: WebView? = null
-    private val HOME_URL = "http://813999.xyz:8088"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        webView = bridge.webView
-
-        webView?.setWebViewClient(object : BridgeWebViewClient(bridge) {
-            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
-                if (request?.isForMainFrame == true) {
-                    view?.loadUrl("file:///android_asset/error.html")
-                }
-            }
-        })
-
-        webView?.addJavascriptInterface(object {
-            @JavascriptInterface
-            fun retry() {
-                runOnUiThread {
-                    webView?.loadUrl(HOME_URL)
-                }
-            }
-        }, "AndroidBridge")
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            window.decorView.systemUiVisibility = (
-                android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-                or android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            )
-        }
-    }
-}
-'''
-          open(p, "w", encoding="utf-8").write(content)
-          print("MainActivity rewritten:", p)
-          PY
+            echo "$MAIN_JAVA_B64" | base64 -d > "$MAINACT"
+            echo "MainActivity rewritten"
           fi
-
-          # ===== 3. Error page (assets) =====
           mkdir -p apk/android/app/src/main/assets
-          cat > apk/android/app/src/main/assets/error.html <<'HTML'
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>网络错误</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: linear-gradient(160deg, #1565C0 0%, #42A5F5 100%);
-    height: 100vh; display: flex; align-items: center; justify-content: center;
-  }
-  .box { text-align: center; color: #fff; padding: 24px; }
-  .icon { font-size: 72px; margin-bottom: 16px; }
-  h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; letter-spacing: 2px; }
-  p { font-size: 17px; opacity: .92; margin-bottom: 6px; }
-  .sub { font-size: 14px; opacity: .7; margin-bottom: 28px; }
-  button {
-    background: #fff; color: #1565C0; border: none; border-radius: 32px;
-    font-size: 17px; font-weight: 600; padding: 14px 52px; cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,.18); transition: transform .12s;
-  }
-  button:active { transform: scale(.96); }
-</style>
-</head>
-<body>
-  <div class="box">
-    <div class="icon">📚</div>
-    <h1>小学全科</h1>
-    <p>连接学习服务失败</p>
-    <p class="sub">请检查网络连接后重试</p>
-    <button onclick="AndroidBridge.retry()">重新连接</button>
-  </div>
-</body>
-</html>
-HTML
+          echo "$ERROR_HTML_B64" | base64 -d > apk/android/app/src/main/assets/error.html
           echo "error.html written"
-
-          # ===== 4. Splash: windowBackground (brand blue + icon) =====
           mkdir -p apk/android/app/src/main/res/drawable
-          cat > apk/android/app/src/main/res/drawable/splash_bg.xml <<'XML'
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="#1565C0"/>
-    <item android:gravity="center">
-        <bitmap android:src="@mipmap/ic_launcher" android:gravity="center"/>
-    </item>
-</layer-list>
-XML
-          python3 - <<'PY'
-          import os
-          p = "apk/android/app/src/main/res/values/styles.xml"
-          s = open(p, encoding="utf-8").read()
-          if "windowBackground" not in s:
-              marker = '<style name="AppTheme.NoActionBar"'
-              idx = s.find(marker)
-              if idx != -1:
-                  insert_at = s.find(">", idx) + 1
-                  s = s[:insert_at] + "\n        <item name=\"android:windowBackground\">@drawable/splash_bg</item>" + s[insert_at:]
-                  open(p, "w", encoding="utf-8").write(s)
-                  print("splash bg patched")
-              else:
-                  print("NoActionBar style not found, skip")
-          else:
-              print("windowBackground already present")
-          PY
-
-          # ===== 5. Kotlin stdlib fix =====
-          python3 - <<'PY'
-          p = "apk/android/app/build.gradle"
-          s = open(p, encoding="utf-8").read()
-          if "configurations.all" not in s:
-              block = ("configurations.all {\n"
-                       "    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'\n"
-                       "    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'\n"
-                       "}\n\n")
-              s = s.replace("dependencies {", block + "dependencies {", 1)
-              open(p, "w", encoding="utf-8").write(s)
-              print("kotlin fix applied")
-          else:
-              print("kotlin fix already present")
-          PY
+          echo "$SPLASH_XML_B64" | base64 -d > apk/android/app/src/main/res/drawable/splash_bg.xml
+          echo "splash_bg.xml written"
+          python3 -c "
+                    import sys
+                    p='apk/android/app/src/main/res/values/styles.xml'
+                    s=open(p,encoding='utf-8').read()
+                    if 'windowBackground' not in s:
+                        m='<style name=\"AppTheme.NoActionBar\"'
+                        i=s.find(m)
+                        if i!=-1:
+                            j=s.find('>',i)+1
+                            s=s[:j]+'\n        <item name=\"android:windowBackground\">@drawable/splash_bg</item>'+s[j:]
+                            open(p,'w',encoding='utf-8').write(s)
+                            print('styles patched')
+                    else:
+                        print('styles already patched')
+          "
+          python3 -c "
+                    p='apk/android/app/build.gradle'
+                    s=open(p,encoding='utf-8').read()
+                    if 'configurations.all' not in s:
+                        b='configurations.all {\n    exclude group: \'org.jetbrains.kotlin\', module: \'kotlin-stdlib-jdk8\'\n    exclude group: \'org.jetbrains.kotlin\', module: \'kotlin-stdlib-jdk7\'\n}\n\n'
+                        s=s.replace('dependencies {',b+'dependencies {',1)
+                        open(p,'w',encoding='utf-8').write(s)
+                        print('kotlin fix applied')
+                    else:
+                        print('kotlin fix present')
+          "
+        env:
+          MAIN_JAVA_B64: cGFja2FnZSBjb20uY2hpbmFzdHVkeWZyZWUuYXBwOwoKaW1wb3J0IGFuZHJvaWQub3MuQnVuZGxlOwppbXBvcnQgYW5kcm9pZC53ZWJraXQuSmF2YXNjcmlwdEludGVyZmFjZTsKaW1wb3J0IGFuZHJvaWQud2Via2l0LldlYlJlc291cmNlRXJyb3I7CmltcG9ydCBhbmRyb2lkLndlYmtpdC5XZWJSZXNvdXJjZVJlcXVlc3Q7CmltcG9ydCBhbmRyb2lkLndlYmtpdC5XZWJWaWV3OwppbXBvcnQgY29tLmdldGNhcGFjaXRvci5CcmlkZ2VBY3Rpdml0eTsKaW1wb3J0IGNvbS5nZXRjYXBhY2l0b3IuQnJpZGdlV2ViVmlld0NsaWVudDsKCnB1YmxpYyBjbGFzcyBNYWluQWN0aXZpdHkgZXh0ZW5kcyBCcmlkZ2VBY3Rpdml0eSB7CiAgICBwcml2YXRlIFdlYlZpZXcgd2ViVmlldzsKICAgIHByaXZhdGUgc3RhdGljIGZpbmFsIFN0cmluZyBIT01FX1VSTCA9ICJodHRwOi8vODEzOTk5Lnh5ejo4MDg4IjsKCiAgICBAT3ZlcnJpZGUKICAgIHB1YmxpYyB2b2lkIG9uQ3JlYXRlKEJ1bmRsZSBzYXZlZEluc3RhbmNlU3RhdGUpIHsKICAgICAgICBzdXBlci5vbkNyZWF0ZShzYXZlZEluc3RhbmNlU3RhdGUpOwogICAgICAgIHdlYlZpZXcgPSBnZXRCcmlkZ2UoKS5nZXRXZWJWaWV3KCk7CgogICAgICAgIHdlYlZpZXcuc2V0V2ViVmlld0NsaWVudChuZXcgQnJpZGdlV2ViVmlld0NsaWVudChnZXRCcmlkZ2UoKSkgewogICAgICAgICAgICBAT3ZlcnJpZGUKICAgICAgICAgICAgcHVibGljIHZvaWQgb25SZWNlaXZlZEVycm9yKFdlYlZpZXcgdmlldywgV2ViUmVzb3VyY2VSZXF1ZXN0IHJlcXVlc3QsIFdlYlJlc291cmNlRXJyb3IgZXJyb3IpIHsKICAgICAgICAgICAgICAgIGlmIChyZXF1ZXN0ICE9IG51bGwgJiYgcmVxdWVzdC5pc0Zvck1haW5GcmFtZSgpKSB7CiAgICAgICAgICAgICAgICAgICAgdmlldy5sb2FkVXJsKCJmaWxlOi8vL2FuZHJvaWRfYXNzZXQvZXJyb3IuaHRtbCIpOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgfSk7CgogICAgICAgIHdlYlZpZXcuYWRkSmF2YXNjcmlwdEludGVyZmFjZShuZXcgT2JqZWN0KCkgewogICAgICAgICAgICBASmF2YXNjcmlwdEludGVyZmFjZQogICAgICAgICAgICBwdWJsaWMgdm9pZCByZXRyeSgpIHsKICAgICAgICAgICAgICAgIHJ1bk9uVWlUaHJlYWQobmV3IFJ1bm5hYmxlKCkgewogICAgICAgICAgICAgICAgICAgIEBPdmVycmlkZQogICAgICAgICAgICAgICAgICAgIHB1YmxpYyB2b2lkIHJ1bigpIHsKICAgICAgICAgICAgICAgICAgICAgICAgd2ViVmlldy5sb2FkVXJsKEhPTUVfVVJMKTsKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9KTsKICAgICAgICAgICAgfQogICAgICAgIH0sICJBbmRyb2lkQnJpZGdlIik7CiAgICB9CgogICAgQE92ZXJyaWRlCiAgICBwdWJsaWMgdm9pZCBvbldpbmRvd0ZvY3VzQ2hhbmdlZChib29sZWFuIGhhc0ZvY3VzKSB7CiAgICAgICAgc3VwZXIub25XaW5kb3dGb2N1c0NoYW5nZWQoaGFzRm9jdXMpOwogICAgICAgIGlmIChoYXNGb2N1cykgewogICAgICAgICAgICBnZXRXaW5kb3coKS5nZXREZWNvclZpZXcoKS5zZXRTeXN0ZW1VaVZpc2liaWxpdHkoCiAgICAgICAgICAgICAgICBhbmRyb2lkLnZpZXcuVmlldy5TWVNURU1fVUlfRkxBR19JTU1FUlNJVkVfU1RJQ0tZCiAgICAgICAgICAgICAgICB8IGFuZHJvaWQudmlldy5WaWV3LlNZU1RFTV9VSV9GTEFHX0ZVTExTQ1JFRU4KICAgICAgICAgICAgICAgIHwgYW5kcm9pZC52aWV3LlZpZXcuU1lTVEVNX1VJX0ZMQUdfSElERV9OQVZJR0FUSU9OCiAgICAgICAgICAgICAgICB8IGFuZHJvaWQudmlldy5WaWV3LlNZU1RFTV9VSV9GTEFHX0xBWU9VVF9TVEFCTEUKICAgICAgICAgICAgICAgIHwgYW5kcm9pZC52aWV3LlZpZXcuU1lTVEVNX1VJX0ZMQUdfTEFZT1VUX0ZVTExTQ1JFRU4KICAgICAgICAgICAgICAgIHwgYW5kcm9pZC52aWV3LlZpZXcuU1lTVEVNX1VJX0ZMQUdfTEFZT1VUX0hJREVfTkFWSUdBVElPTik7CiAgICAgICAgfQogICAgfQp9Cg==
+          ERROR_HTML_B64: PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InpoLUNOIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAsIG1heGltdW0tc2NhbGU9MS4wLCB1c2VyLXNjYWxhYmxlPW5vIj4KPHRpdGxlPue9kee7nOmUmeivrzwvdGl0bGU+CjxzdHlsZT4KICAqIHsgbWFyZ2luOjA7IHBhZGRpbmc6MDsgYm94LXNpemluZzpib3JkZXItYm94OyB9CiAgYm9keSB7CiAgICBmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgIlBpbmdGYW5nIFNDIiwgIk1pY3Jvc29mdCBZYUhlaSIsIHNhbnMtc2VyaWY7CiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTYwZGVnLCAjMTU2NUMwIDAlLCAjNDJBNUY1IDEwMCUpOwogICAgaGVpZ2h0OiAxMDB2aDsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgfQogIC5ib3ggeyB0ZXh0LWFsaWduOiBjZW50ZXI7IGNvbG9yOiAjZmZmOyBwYWRkaW5nOiAyNHB4OyB9CiAgLmljb24geyBmb250LXNpemU6IDcycHg7IG1hcmdpbi1ib3R0b206IDE2cHg7IH0KICBoMSB7IGZvbnQtc2l6ZTogMjhweDsgZm9udC13ZWlnaHQ6IDcwMDsgbWFyZ2luLWJvdHRvbTogMTJweDsgbGV0dGVyLXNwYWNpbmc6IDJweDsgfQogIHAgeyBmb250LXNpemU6IDE3cHg7IG9wYWNpdHk6IC45MjsgbWFyZ2luLWJvdHRvbTogNnB4OyB9CiAgLnN1YiB7IGZvbnQtc2l6ZTogMTRweDsgb3BhY2l0eTogLjc7IG1hcmdpbi1ib3R0b206IDI4cHg7IH0KICBidXR0b24gewogICAgYmFja2dyb3VuZDogI2ZmZjsgY29sb3I6ICMxNTY1QzA7IGJvcmRlcjogbm9uZTsgYm9yZGVyLXJhZGl1czogMzJweDsKICAgIGZvbnQtc2l6ZTogMTdweDsgZm9udC13ZWlnaHQ6IDYwMDsgcGFkZGluZzogMTRweCA1MnB4OyBjdXJzb3I6IHBvaW50ZXI7CiAgICBib3gtc2hhZG93OiAwIDZweCAyMHB4IHJnYmEoMCwwLDAsLjE4KTsgdHJhbnNpdGlvbjogdHJhbnNmb3JtIC4xMnM7CiAgfQogIGJ1dHRvbjphY3RpdmUgeyB0cmFuc2Zvcm06IHNjYWxlKC45Nik7IH0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KICA8ZGl2IGNsYXNzPSJib3giPgogICAgPGRpdiBjbGFzcz0iaWNvbiI+JiMxMjgyMTg7PC9kaXY+CiAgICA8aDE+5bCP5a2m5YWo56eRPC9oMT4KICAgIDxwPui/nuaOpeWtpuS5oOacjeWKoeWksei0pTwvcD4KICAgIDxwIGNsYXNzPSJzdWIiPuivt+ajgOafpee9kee7nOi/nuaOpeWQjumHjeivlTwvcD4KICAgIDxidXR0b24gb25jbGljaz0iQW5kcm9pZEJyaWRnZS5yZXRyeSgpIj7ph43mlrDov57mjqU8L2J1dHRvbj4KICA8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+Cg==
+          SPLASH_XML_B64: PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPGxheWVyLWxpc3QgeG1sbnM6YW5kcm9pZD0iaHR0cDovL3NjaGVtYXMuYW5kcm9pZC5jb20vYXBrL3Jlcy9hbmRyb2lkIj4KICAgIDxpdGVtIGFuZHJvaWQ6ZHJhd2FibGU9IiMxNTY1QzAiLz4KICAgIDxpdGVtIGFuZHJvaWQ6Z3Jhdml0eT0iY2VudGVyIj4KICAgICAgICA8Yml0bWFwIGFuZHJvaWQ6c3JjPSJAbWlwbWFwL2ljX2xhdW5jaGVyIiBhbmRyb2lkOmdyYXZpdHk9ImNlbnRlciIvPgogICAgPC9pdGVtPgo8L2xheWVyLWxpc3Q+Cg==
 
       - name: Generate launcher icons
         run: |
