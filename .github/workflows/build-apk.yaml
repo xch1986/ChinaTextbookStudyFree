@@ -63,37 +63,21 @@ jobs:
           mkdir -p apk/android/app/src/main/res/drawable
           echo "$SPLASH_XML_B64" | base64 -d > apk/android/app/src/main/res/drawable/splash_bg.xml
           echo "splash_bg.xml written"
-          python3 -c "
-                    import sys
-                    p='apk/android/app/src/main/res/values/styles.xml'
-                    s=open(p,encoding='utf-8').read()
-                    if 'windowBackground' not in s:
-                        m='<style name=\"AppTheme.NoActionBar\"'
-                        i=s.find(m)
-                        if i!=-1:
-                            j=s.find('>',i)+1
-                            s=s[:j]+'\n        <item name=\"android:windowBackground\">@drawable/splash_bg</item>'+s[j:]
-                            open(p,'w',encoding='utf-8').write(s)
-                            print('styles patched')
-                    else:
-                        print('styles already patched')
-          "
-          python3 -c "
-                    p='apk/android/app/build.gradle'
-                    s=open(p,encoding='utf-8').read()
-                    if 'configurations.all' not in s:
-                        b='configurations.all {\n    exclude group: \'org.jetbrains.kotlin\', module: \'kotlin-stdlib-jdk8\'\n    exclude group: \'org.jetbrains.kotlin\', module: \'kotlin-stdlib-jdk7\'\n}\n\n'
-                        s=s.replace('dependencies {',b+'dependencies {',1)
-                        open(p,'w',encoding='utf-8').write(s)
-                        print('kotlin fix applied')
-                    else:
-                        print('kotlin fix present')
-          "
+          echo "$STYLES_PATCH_B64" | base64 -d > /tmp/patch_styles.py
+          python3 /tmp/patch_styles.py
+          echo "$KOTLIN_PATCH_B64" | base64 -d > /tmp/patch_kotlin.py
+          python3 /tmp/patch_kotlin.py
+          echo "$STYLES_PATCH_B64" | base64 -d > /tmp/patch_styles.py
+          python3 /tmp/patch_styles.py
+          echo "$KOTLIN_PATCH_B64" | base64 -d > /tmp/patch_kotlin.py
+          python3 /tmp/patch_kotlin.py
         env:
           MAIN_JAVA_B64: cGFja2FnZSBjb20uY2hpbmFzdHVkeWZyZWUuYXBwOwoKaW1wb3J0IGFuZHJvaWQub3MuQnVuZGxlOwppbXBvcnQgYW5kcm9pZC53ZWJraXQuSmF2YXNjcmlwdEludGVyZmFjZTsKaW1wb3J0IGFuZHJvaWQud2Via2l0LldlYlJlc291cmNlRXJyb3I7CmltcG9ydCBhbmRyb2lkLndlYmtpdC5XZWJSZXNvdXJjZVJlcXVlc3Q7CmltcG9ydCBhbmRyb2lkLndlYmtpdC5XZWJWaWV3OwppbXBvcnQgY29tLmdldGNhcGFjaXRvci5CcmlkZ2VBY3Rpdml0eTsKaW1wb3J0IGNvbS5nZXRjYXBhY2l0b3IuQnJpZGdlV2ViVmlld0NsaWVudDsKCnB1YmxpYyBjbGFzcyBNYWluQWN0aXZpdHkgZXh0ZW5kcyBCcmlkZ2VBY3Rpdml0eSB7CiAgICBwcml2YXRlIFdlYlZpZXcgd2ViVmlldzsKICAgIHByaXZhdGUgc3RhdGljIGZpbmFsIFN0cmluZyBIT01FX1VSTCA9ICJodHRwOi8vODEzOTk5Lnh5ejo4MDg4IjsKCiAgICBAT3ZlcnJpZGUKICAgIHB1YmxpYyB2b2lkIG9uQ3JlYXRlKEJ1bmRsZSBzYXZlZEluc3RhbmNlU3RhdGUpIHsKICAgICAgICBzdXBlci5vbkNyZWF0ZShzYXZlZEluc3RhbmNlU3RhdGUpOwogICAgICAgIHdlYlZpZXcgPSBnZXRCcmlkZ2UoKS5nZXRXZWJWaWV3KCk7CgogICAgICAgIHdlYlZpZXcuc2V0V2ViVmlld0NsaWVudChuZXcgQnJpZGdlV2ViVmlld0NsaWVudChnZXRCcmlkZ2UoKSkgewogICAgICAgICAgICBAT3ZlcnJpZGUKICAgICAgICAgICAgcHVibGljIHZvaWQgb25SZWNlaXZlZEVycm9yKFdlYlZpZXcgdmlldywgV2ViUmVzb3VyY2VSZXF1ZXN0IHJlcXVlc3QsIFdlYlJlc291cmNlRXJyb3IgZXJyb3IpIHsKICAgICAgICAgICAgICAgIGlmIChyZXF1ZXN0ICE9IG51bGwgJiYgcmVxdWVzdC5pc0Zvck1haW5GcmFtZSgpKSB7CiAgICAgICAgICAgICAgICAgICAgdmlldy5sb2FkVXJsKCJmaWxlOi8vL2FuZHJvaWRfYXNzZXQvZXJyb3IuaHRtbCIpOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgfSk7CgogICAgICAgIHdlYlZpZXcuYWRkSmF2YXNjcmlwdEludGVyZmFjZShuZXcgT2JqZWN0KCkgewogICAgICAgICAgICBASmF2YXNjcmlwdEludGVyZmFjZQogICAgICAgICAgICBwdWJsaWMgdm9pZCByZXRyeSgpIHsKICAgICAgICAgICAgICAgIHJ1bk9uVWlUaHJlYWQobmV3IFJ1bm5hYmxlKCkgewogICAgICAgICAgICAgICAgICAgIEBPdmVycmlkZQogICAgICAgICAgICAgICAgICAgIHB1YmxpYyB2b2lkIHJ1bigpIHsKICAgICAgICAgICAgICAgICAgICAgICAgd2ViVmlldy5sb2FkVXJsKEhPTUVfVVJMKTsKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9KTsKICAgICAgICAgICAgfQogICAgICAgIH0sICJBbmRyb2lkQnJpZGdlIik7CiAgICB9CgogICAgQE92ZXJyaWRlCiAgICBwdWJsaWMgdm9pZCBvbldpbmRvd0ZvY3VzQ2hhbmdlZChib29sZWFuIGhhc0ZvY3VzKSB7CiAgICAgICAgc3VwZXIub25XaW5kb3dGb2N1c0NoYW5nZWQoaGFzRm9jdXMpOwogICAgICAgIGlmIChoYXNGb2N1cykgewogICAgICAgICAgICBnZXRXaW5kb3coKS5nZXREZWNvclZpZXcoKS5zZXRTeXN0ZW1VaVZpc2liaWxpdHkoCiAgICAgICAgICAgICAgICBhbmRyb2lkLnZpZXcuVmlldy5TWVNURU1fVUlfRkxBR19JTU1FUlNJVkVfU1RJQ0tZCiAgICAgICAgICAgICAgICB8IGFuZHJvaWQudmlldy5WaWV3LlNZU1RFTV9VSV9GTEFHX0ZVTExTQ1JFRU4KICAgICAgICAgICAgICAgIHwgYW5kcm9pZC52aWV3LlZpZXcuU1lTVEVNX1VJX0ZMQUdfSElERV9OQVZJR0FUSU9OCiAgICAgICAgICAgICAgICB8IGFuZHJvaWQudmlldy5WaWV3LlNZU1RFTV9VSV9GTEFHX0xBWU9VVF9TVEFCTEUKICAgICAgICAgICAgICAgIHwgYW5kcm9pZC52aWV3LlZpZXcuU1lTVEVNX1VJX0ZMQUdfTEFZT1VUX0ZVTExTQ1JFRU4KICAgICAgICAgICAgICAgIHwgYW5kcm9pZC52aWV3LlZpZXcuU1lTVEVNX1VJX0ZMQUdfTEFZT1VUX0hJREVfTkFWSUdBVElPTik7CiAgICAgICAgfQogICAgfQp9Cg==
           ERROR_HTML_B64: PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InpoLUNOIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAsIG1heGltdW0tc2NhbGU9MS4wLCB1c2VyLXNjYWxhYmxlPW5vIj4KPHRpdGxlPue9kee7nOmUmeivrzwvdGl0bGU+CjxzdHlsZT4KICAqIHsgbWFyZ2luOjA7IHBhZGRpbmc6MDsgYm94LXNpemluZzpib3JkZXItYm94OyB9CiAgYm9keSB7CiAgICBmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgIlBpbmdGYW5nIFNDIiwgIk1pY3Jvc29mdCBZYUhlaSIsIHNhbnMtc2VyaWY7CiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTYwZGVnLCAjMTU2NUMwIDAlLCAjNDJBNUY1IDEwMCUpOwogICAgaGVpZ2h0OiAxMDB2aDsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgfQogIC5ib3ggeyB0ZXh0LWFsaWduOiBjZW50ZXI7IGNvbG9yOiAjZmZmOyBwYWRkaW5nOiAyNHB4OyB9CiAgLmljb24geyBmb250LXNpemU6IDcycHg7IG1hcmdpbi1ib3R0b206IDE2cHg7IH0KICBoMSB7IGZvbnQtc2l6ZTogMjhweDsgZm9udC13ZWlnaHQ6IDcwMDsgbWFyZ2luLWJvdHRvbTogMTJweDsgbGV0dGVyLXNwYWNpbmc6IDJweDsgfQogIHAgeyBmb250LXNpemU6IDE3cHg7IG9wYWNpdHk6IC45MjsgbWFyZ2luLWJvdHRvbTogNnB4OyB9CiAgLnN1YiB7IGZvbnQtc2l6ZTogMTRweDsgb3BhY2l0eTogLjc7IG1hcmdpbi1ib3R0b206IDI4cHg7IH0KICBidXR0b24gewogICAgYmFja2dyb3VuZDogI2ZmZjsgY29sb3I6ICMxNTY1QzA7IGJvcmRlcjogbm9uZTsgYm9yZGVyLXJhZGl1czogMzJweDsKICAgIGZvbnQtc2l6ZTogMTdweDsgZm9udC13ZWlnaHQ6IDYwMDsgcGFkZGluZzogMTRweCA1MnB4OyBjdXJzb3I6IHBvaW50ZXI7CiAgICBib3gtc2hhZG93OiAwIDZweCAyMHB4IHJnYmEoMCwwLDAsLjE4KTsgdHJhbnNpdGlvbjogdHJhbnNmb3JtIC4xMnM7CiAgfQogIGJ1dHRvbjphY3RpdmUgeyB0cmFuc2Zvcm06IHNjYWxlKC45Nik7IH0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KICA8ZGl2IGNsYXNzPSJib3giPgogICAgPGRpdiBjbGFzcz0iaWNvbiI+JiMxMjgyMTg7PC9kaXY+CiAgICA8aDE+5bCP5a2m5YWo56eRPC9oMT4KICAgIDxwPui/nuaOpeWtpuS5oOacjeWKoeWksei0pTwvcD4KICAgIDxwIGNsYXNzPSJzdWIiPuivt+ajgOafpee9kee7nOi/nuaOpeWQjumHjeivlTwvcD4KICAgIDxidXR0b24gb25jbGljaz0iQW5kcm9pZEJyaWRnZS5yZXRyeSgpIj7ph43mlrDov57mjqU8L2J1dHRvbj4KICA8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+Cg==
           SPLASH_XML_B64: PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPGxheWVyLWxpc3QgeG1sbnM6YW5kcm9pZD0iaHR0cDovL3NjaGVtYXMuYW5kcm9pZC5jb20vYXBrL3Jlcy9hbmRyb2lkIj4KICAgIDxpdGVtIGFuZHJvaWQ6ZHJhd2FibGU9IiMxNTY1QzAiLz4KICAgIDxpdGVtIGFuZHJvaWQ6Z3Jhdml0eT0iY2VudGVyIj4KICAgICAgICA8Yml0bWFwIGFuZHJvaWQ6c3JjPSJAbWlwbWFwL2ljX2xhdW5jaGVyIiBhbmRyb2lkOmdyYXZpdHk9ImNlbnRlciIvPgogICAgPC9pdGVtPgo8L2xheWVyLWxpc3Q+Cg==
 
+          STYLES_PATCH_B64: CmltcG9ydCBzeXMKcD0nYXBrL2FuZHJvaWQvYXBwL3NyYy9tYWluL3Jlcy92YWx1ZXMvc3R5bGVzLnhtbCcKcz1vcGVuKHAsZW5jb2Rpbmc9J3V0Zi04JykucmVhZCgpCmlmICd3aW5kb3dCYWNrZ3JvdW5kJyBub3QgaW4gczoKICAgIG09JzxzdHlsZSBuYW1lPSJBcHBUaGVtZS5Ob0FjdGlvbkJhciInCiAgICBpPXMuZmluZChtKQogICAgaWYgaSE9LTE6CiAgICAgICAgaj1zLmZpbmQoJz4nLGkpKzEKICAgICAgICBzPXNbOmpdKydcbiAgICAgICAgPGl0ZW0gbmFtZT0iYW5kcm9pZDp3aW5kb3dCYWNrZ3JvdW5kIj5AZHJhd2FibGUvc3BsYXNoX2JnPC9pdGVtPicrc1tqOl0KICAgICAgICBvcGVuKHAsJ3cnLGVuY29kaW5nPSd1dGYtOCcpLndyaXRlKHMpCiAgICAgICAgcHJpbnQoJ3N0eWxlcyBwYXRjaGVkJykKZWxzZToKICAgIHByaW50KCdzdHlsZXMgYWxyZWFkeSBwYXRjaGVkJykK
+          KOTLIN_PATCH_B64: CnA9J2Fway9hbmRyb2lkL2FwcC9idWlsZC5ncmFkbGUnCnM9b3BlbihwLGVuY29kaW5nPSd1dGYtOCcpLnJlYWQoKQppZiAnY29uZmlndXJhdGlvbnMuYWxsJyBub3QgaW4gczoKICAgIGI9J2NvbmZpZ3VyYXRpb25zLmFsbCB7XG4gICAgZXhjbHVkZSBncm91cDogXCdvcmcuamV0YnJhaW5zLmtvdGxpblwnLCBtb2R1bGU6IFwna290bGluLXN0ZGxpYi1qZGs4XCdcbiAgICBleGNsdWRlIGdyb3VwOiBcJ29yZy5qZXRicmFpbnMua290bGluXCcsIG1vZHVsZTogXCdrb3RsaW4tc3RkbGliLWpkazdcJ1xufVxuXG4nCiAgICBzPXMucmVwbGFjZSgnZGVwZW5kZW5jaWVzIHsnLGIrJ2RlcGVuZGVuY2llcyB7JywxKQogICAgb3BlbihwLCd3JyxlbmNvZGluZz0ndXRmLTgnKS53cml0ZShzKQogICAgcHJpbnQoJ2tvdGxpbiBmaXggYXBwbGllZCcpCmVsc2U6CiAgICBwcmludCgna290bGluIGZpeCBwcmVzZW50JykK
       - name: Generate launcher icons
         run: |
           pip install pillow -q
