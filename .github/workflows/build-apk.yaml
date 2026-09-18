@@ -29,7 +29,7 @@ jobs:
           mkdir -p apk/www
           cd apk
           npm init -y >/dev/null
-          npm install --no-audit --no-fund @capacitor/core @capacitor/android
+          npm install --no-audit --no-fund @capacitor/core @capacitor/android @capacitor/cli
           npx cap init "小学全科" "com.chinastudyfree.app" --web-dir=www --no-git
           cat > capacitor.config.json <<'JSON'
           {
