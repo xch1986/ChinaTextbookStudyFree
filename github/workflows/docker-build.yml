@@ -1,0 +1,102 @@
+# ============================================================
+# ChinaTextbookStudyFree — 自动构建 Docker 镜像并发布到 GHCR
+#
+# 触发方式：
+#   1) push 到 main/master 分支（fork 仓库后会自动触发）
+#   2) 在 Actions 页面手动 Run workflow（无需改任何代码）
+#
+# 产物：
+#   ghcr.io/<你的GitHub用户名>/chinastudyfree:latest
+#
+# 可选（同时发布到 Docker Hub）：
+#   在仓库 Settings -> Secrets and variables -> Actions 添加：
+#     DOCKERHUB_USERNAME : 你的 Docker Hub 用户名
+#     DOCKERHUB_TOKEN    : Docker Hub Access Token（账号->Account settings->Security->New Access Token，勾选 Read/Write/Delete）
+#   配置后会自动额外推送 docker.io/<DOCKERHUB_USERNAME>/chinastudyfree:latest
+# ============================================================
+
+name: Build & Publish Docker Image
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: docker-build
+  cancel-in-progress: true
+
+env:
+  IMAGE_NAME: chinastudyfree
+
+jobs:
+  # ---------- 主构建：发布到 GHCR（无需任何配置）----------
+  build-ghcr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push to GHCR
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          # GitHub Actions 运行在 GitHub 云上，直连下载资源最快最稳
+          build-args: |
+            GH_MIRROR=
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ---------- 可选：同时发布到 Docker Hub（配置了 secrets 才运行）----------
+  build-dockerhub:
+    needs: build-ghcr
+    runs-on: ubuntu-latest
+    # secrets 不能直接在 job 级 if 中使用，先映射为 job 环境变量再判断
+    env:
+      DH_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+      DH_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+    if: ${{ env.DH_USER != '' && env.DH_TOKEN != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DH_USER }}
+          password: ${{ env.DH_TOKEN }}
+
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ env.DH_USER }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.DH_USER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          build-args: |
+            GH_MIRROR=
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
