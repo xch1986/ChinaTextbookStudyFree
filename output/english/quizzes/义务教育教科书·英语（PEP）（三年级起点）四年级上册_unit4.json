@@ -1,9 +1,9 @@
 {
-  "textbook": "人教版 PEP 英语四年级上册",
-  "unit": "Unit 4 My home",
+  "textbook": "人教版小学英语（PEP）四年级上册",
+  "unit": "Unit 4 Helping in the community",
   "unit_number": 4,
   "unit_test": {
-    "title": "Unit 4 My home 单元基础过关测验",
+    "title": "Unit 4 Helping in the community 单元测验",
     "total_score": 100,
     "time_minutes": 40,
     "questions": [
@@ -12,703 +12,366 @@
         "type": "true_false",
         "score": 2,
         "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "'study' 的中文意思是 '卧室'。",
+        "knowledge_point": "社区职业词汇",
+        "question": "\"doctor\" 是\"医生\"。",
         "options": [],
-        "answer": "错",
-        "explanation": "study 的意思是书房；卧室应该是 bedroom。"
+        "answer": "对",
+        "explanation": "doctor 医生。"
       },
       {
         "id": 2,
         "type": "true_false",
         "score": 2,
         "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "厨房的英文单词是 'kitchen'。",
+        "knowledge_point": "询问职业的句型",
+        "question": "\"What's his job?\" 可以用来询问他的职业。",
         "options": [],
         "answer": "对",
-        "explanation": "kitchen 意为厨房，拼写正确。"
-      },
-      {
-        "id": 3,
-        "type": "true_false",
-        "score": 2,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "'fridge' 的意思是冰箱。",
-        "options": [],
-        "answer": "对",
-        "explanation": "fridge 是 refrigerator 的缩写，意为冰箱。"
-      },
-      {
-        "id": 4,
-        "type": "true_false",
-        "score": 2,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "回答 'Is she in the study?' 可以用 'Yes, it is.'",
-        "options": [],
-        "answer": "错",
-        "explanation": "问句主语是 she，回答也应使用 she，即：Yes, she is。"
-      },
-      {
-        "id": 5,
-        "type": "true_false",
-        "score": 2,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "'phone' 是电话的意思。",
-        "options": [],
-        "answer": "对",
-        "explanation": "phone 是指电话或手机。"
-      },
-      {
-        "id": 6,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "Go to the ______. Watch TV.",
-        "options": [
-          "kitchen",
-          "bathroom",
-          "living room",
-          "bedroom"
-        ],
-        "answer": "living room",
-        "explanation": "根据常识，看电视通常在客厅（living room）。"
-      },
-      {
-        "id": 7,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "Go to the bedroom. Have a ______.",
-        "options": [
-          "snack",
-          "nap",
-          "shower",
-          "read"
-        ],
-        "answer": "nap",
-        "explanation": "Have a nap 意为午睡，在卧室（bedroom）进行。"
-      },
-      {
-        "id": 8,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "—Where are the keys? —______ in the door.",
-        "options": [
-          "It is",
-          "They are",
-          "She is",
-          "He is"
-        ],
-        "answer": "They are",
-        "explanation": "keys 为复数形式，其代词应为 they。"
-      },
-      {
-        "id": 9,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "Go to the ______ . Read a book.",
-        "options": [
-          "study",
-          "kitchen",
-          "bathroom",
-          "fridge"
-        ],
-        "answer": "study",
-        "explanation": "阅读通常在书房（study）进行。"
-      },
-      {
-        "id": 10,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "Is he ______ the living room?",
-        "options": [
-          "on",
-          "under",
-          "in",
-          "at"
-        ],
-        "answer": "in",
-        "explanation": "在那间屋子里的介词用 in。"
-      },
-      {
-        "id": 11,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "—Is your cat in the kitchen? —______",
-        "options": [
-          "No, she is.",
-          "Yes, she isn't.",
-          "No, she isn't.",
-          "Yes, it is not."
-        ],
-        "answer": "No, she isn't.",
-        "explanation": "一般疑问句否定回答为 No, 主语 + isn't。"
-      },
-      {
-        "id": 12,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "Open the ______ . Have a snack.",
-        "options": [
-          "bed",
-          "fridge",
-          "phone",
-          "table"
-        ],
-        "answer": "fridge",
-        "explanation": "吃零食需要从冰箱（fridge）里拿。"
-      },
-      {
-        "id": 13,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "元音字母u在开音节中的发音",
-        "question": "以下哪个单词中 'u' 的发音与其他三个不同？",
-        "options": [
-          "use",
-          "cute",
-          "tube",
-          "duck"
-        ],
-        "answer": "duck",
-        "explanation": "use, cute, tube 中的 u 发 /juː/，而 duck 中的 u 发 /ʌ/。"
-      },
-      {
-        "id": 14,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "Where ______ my books?",
-        "options": [
-          "is",
-          "am",
-          "are",
-          "be"
-        ],
-        "answer": "are",
-        "explanation": "books 是复数，对应的 be 动词是 are。"
-      },
-      {
-        "id": 15,
-        "type": "choice",
-        "score": 5,
-        "difficulty": 3,
-        "knowledge_point": "居室名称词汇",
-        "question": "This is my home. It ______ a big living room.",
-        "options": [
-          "have",
-          "has",
-          "is",
-          "are"
-        ],
-        "answer": "has",
-        "explanation": "It 是第三人称单数，表示“有”要用 has。"
-      },
-      {
-        "id": 16,
-        "type": "fill_blank_text",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "Go to the ______ . Take a shower.",
-        "options": [],
-        "answer": "bathroom",
-        "explanation": "洗澡（take a shower）是在浴室里。"
-      },
-      {
-        "id": 17,
-        "type": "fill_blank_text",
-        "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "Is she in the kitchen? No, she ______ .",
-        "options": [],
-        "answer": "isn't",
-        "explanation": "is 引导的疑问句否定回答为 isn't。"
-      },
-      {
-        "id": 18,
-        "type": "fill_blank_text",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "Go to the ______ . Make a salad.",
-        "options": [],
-        "answer": "kitchen",
-        "explanation": "做沙拉通常在厨房。"
-      },
-      {
-        "id": 19,
-        "type": "fill_blank_text",
-        "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "______ is the cat? It's under the bed.",
-        "options": [],
-        "answer": "where",
-        "explanation": "询问位置用疑问词 where。"
-      },
-      {
-        "id": 20,
-        "type": "matching",
-        "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "将下列英文单词与对应的中文意思匹配。",
-        "options": [
-          "bed",
-          "table",
-          "sofa",
-          "phone",
-          "沙发",
-          "电话",
-          "床",
-          "桌子"
-        ],
-        "answer": "A-3,B-4,C-1,D-2",
-        "explanation": "bed-床, table-桌子, sofa-沙发, phone-电话。"
-      },
-      {
-        "id": 21,
-        "type": "matching",
-        "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "居室名称词汇",
-        "question": "将下列短语与对应的中文意思匹配。",
-        "options": [
-          "in the desk",
-          "near the window",
-          "on the fridge",
-          "behind the door",
-          "在门后",
-          "在书桌里",
-          "在冰箱上",
-          "在窗户旁"
-        ],
-        "answer": "A-2,B-4,C-3,D-1",
-        "explanation": "in the desk-在书桌里, near the window-在窗户旁, on the fridge-在冰箱上, behind the door-在门后。"
-      },
-      {
-        "id": 22,
-        "type": "word_order",
-        "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "将单词连成句子（注意标点）：",
-        "options": [
-          "she",
-          "in",
-          "the",
-          "Is",
-          "study?"
-        ],
-        "answer": "Is,she,in,the,study?",
-        "explanation": "一般疑问句 Be 动词置于句首，后接主语和地点。"
-      },
-      {
-        "id": 23,
-        "type": "word_order",
-        "score": 5,
-        "difficulty": 3,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "将单词连成句子：",
-        "options": [
-          "No",
-          "they",
-          "aren't."
-        ],
-        "answer": "No,they,aren't.",
-        "explanation": "否定回答格式：No, 主语 + aren't。"
-      }
-    ]
-  },
-  "exam": {
-    "title": "四年级英语上册期中综合能力评估卷 (My Home 专题)",
-    "total_score": 100,
-    "time_minutes": 60,
-    "questions": [
-      {
-        "id": 1,
-        "type": "true_false",
-        "score": 2,
-        "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "'bathroom' 与洗澡有关。",
-        "options": [],
-        "answer": "对",
-        "explanation": "bathroom 意为浴室。"
-      },
-      {
-        "id": 2,
-        "type": "true_false",
-        "score": 2,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "'sofa' 是沙发的音译词。",
-        "options": [],
-        "answer": "对",
-        "explanation": "sofa 对应中文“沙发”。"
+        "explanation": "What's his job? 他的工作是什么？"
       },
       {
         "id": 3,
         "type": "true_false",
         "score": 2,
         "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "询问‘他们在哪里？’应该说 'Where is they?'",
+        "knowledge_point": "青少年帮助社区的表达",
+        "question": "\"I can help by cleaning the park.\" 表示我可以通过打扫公园来帮忙。",
         "options": [],
-        "answer": "错",
-        "explanation": "they 是复数，应配合 use are，即 Where are they?"
+        "answer": "对",
+        "explanation": "help by + doing 表示通过做某事来帮忙。"
       },
       {
         "id": 4,
         "type": "true_false",
         "score": 2,
-        "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "'bedroom' 的意思也是书房。",
+        "difficulty": 2,
+        "knowledge_point": "一般现在时第三人称单数",
+        "question": "\"She work in a hospital.\" 这句话是正确的。",
         "options": [],
         "answer": "错",
-        "explanation": "bedroom 是卧室，study 是书房。"
+        "explanation": "第三人称单数主语 She 后面动词要加 s：She works in a hospital. 她在医院工作。"
       },
       {
         "id": 5,
         "type": "true_false",
         "score": 2,
-        "difficulty": 3,
-        "knowledge_point": "元音字母u在开音节中的发音",
-        "question": "单词 'mule' 里的字母 'u' 发音跟 'cute' 里的 'u' 一样。",
+        "difficulty": 2,
+        "knowledge_point": "社区职业词汇",
+        "question": "\"police officer\" 是\"警察\"。",
         "options": [],
         "answer": "对",
-        "explanation": "两者都是 u-e 结构，发 /juː/。"
+        "explanation": "police officer 警察。"
       },
       {
         "id": 6,
         "type": "choice",
         "score": 5,
         "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "I am hungry. I go to the ______ .",
+        "knowledge_point": "社区职业词汇",
+        "question": "给人看病的是（ ）。",
         "options": [
-          "bathroom",
-          "kitchen",
-          "bedroom",
-          "study"
+          "doctor",
+          "teacher",
+          "driver",
+          "cook"
         ],
-        "answer": "kitchen",
-        "explanation": "饿了（hungry）去厨房（kitchen）找吃的。"
+        "answer": "doctor",
+        "explanation": "医生（doctor）给人看病。"
       },
       {
         "id": 7,
         "type": "choice",
         "score": 5,
-        "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "Are the keys ______ the table?",
+        "difficulty": 1,
+        "knowledge_point": "询问职业的句型",
+        "question": "\"他是消防员\"，用英语说（ ）。",
         "options": [
-          "at",
-          "on",
-          "to",
-          "with"
+          "He is a firefighter.",
+          "He is a doctor.",
+          "He is a teacher.",
+          "He is a driver."
         ],
-        "answer": "on",
-        "explanation": "在桌子上用介词 on。"
+        "answer": "He is a firefighter.",
+        "explanation": "firefighter 消防员。"
       },
       {
         "id": 8,
         "type": "choice",
         "score": 5,
         "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "—Are they in the door? —No, ______ .",
+        "knowledge_point": "一般现在时第三人称单数",
+        "question": "\"She ______ in a school.\" 她在一所学校工作。",
         "options": [
-          "they are",
-          "it isn't",
-          "they aren't",
-          "she isn't"
+          "works",
+          "work",
+          "working",
+          "worked"
         ],
-        "answer": "they aren't",
-        "explanation": "复数一般疑问句否定回答用 No, they aren't。"
+        "answer": "works",
+        "explanation": "第三人称单数 She 后动词加 s：works。"
       },
       {
         "id": 9,
         "type": "choice",
         "score": 5,
         "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "The ______ is in the kitchen. It's cold.",
+        "knowledge_point": "社区职业词汇",
+        "question": "教学生知识的是（ ）。",
         "options": [
-          "bed",
-          "sofa",
-          "fridge",
-          "desk"
+          "teacher",
+          "nurse",
+          "police officer",
+          "shop assistant"
         ],
-        "answer": "fridge",
-        "explanation": "冰箱（fridge）在厨房，且里面是冷的（cold）。"
+        "answer": "teacher",
+        "explanation": "老师（teacher）教学生。"
       },
       {
         "id": 10,
         "type": "choice",
         "score": 5,
-        "difficulty": 3,
-        "knowledge_point": "元音字母u在开音节中的发音",
-        "question": "Choose the word with the /ju:/ sound.",
+        "difficulty": 2,
+        "knowledge_point": "青少年帮助社区的表达",
+        "question": "你想表达\"我可以帮助老人\"，说（ ）。",
         "options": [
-          "bus",
-          "cup",
-          "excuse",
-          "run"
+          "I can help old people.",
+          "I can help old.",
+          "I help old people.",
+          "Can I help you?"
         ],
-        "answer": "excuse",
-        "explanation": "excuse 里的 u 发 /juː/，其余均发 /ʌ/。"
+        "answer": "I can help old people.",
+        "explanation": "help old people 帮助老人。"
       },
       {
         "id": 11,
         "type": "choice",
         "score": 5,
         "difficulty": 2,
-        "knowledge_point": "居室名称词汇",
-        "question": "Let's go to the ______ and read some books.",
+        "knowledge_point": "询问职业的句型",
+        "question": "\"What does your mother do?\" 的正确回答是（ ）。",
         "options": [
-          "study",
-          "living room",
-          "kitchen",
-          "bathroom"
+          "She is a nurse.",
+          "She is my mum.",
+          "She is tall.",
+          "She is at home."
         ],
-        "answer": "study",
-        "explanation": "书房（study）是读书的地方。"
+        "answer": "She is a nurse.",
+        "explanation": "What does ... do? 询问职业，回答 She is a nurse. 她是护士。"
       },
       {
         "id": 12,
         "type": "choice",
         "score": 5,
-        "difficulty": 3,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "Where is my cat? ______ in the living room.",
+        "difficulty": 2,
+        "knowledge_point": "青少年帮助社区的表达",
+        "question": "\"We can help by picking up rubbish.\" 中 pick up rubbish 的意思是（ ）。",
         "options": [
-          "He's",
-          "It's",
-          "They're",
-          "I'm"
+          "捡垃圾",
+          "扔垃圾",
+          "扫地",
+          "浇花"
         ],
-        "answer": "It's",
-        "explanation": "指代单数动物（my cat）常用 it。"
+        "answer": "捡垃圾",
+        "explanation": "pick up rubbish 捡垃圾，是帮助社区的好行为。"
       },
       {
         "id": 13,
         "type": "choice",
         "score": 5,
         "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "Put the ______ in the bedroom.",
+        "knowledge_point": "社区职业词汇",
+        "question": "照顾病人的是（ ）。",
         "options": [
-          "bed",
-          "fridge",
-          "sink",
-          "cooker"
+          "nurse",
+          "farmer",
+          "worker",
+          "actor"
         ],
-        "answer": "bed",
-        "explanation": "床（bed）放在卧室。"
+        "answer": "nurse",
+        "explanation": "护士（nurse）照顾病人。"
       },
       {
         "id": 14,
         "type": "choice",
         "score": 5,
         "difficulty": 2,
-        "knowledge_point": "居室名称词汇",
-        "question": "My father is in the ______ . He is watching TV.",
+        "knowledge_point": "一般现在时第三人称单数",
+        "question": "My father ______ at a bank.",
         "options": [
-          "study",
-          "living room",
-          "bathroom",
-          "kitchen"
+          "works",
+          "work",
+          "working",
+          "worked"
         ],
-        "answer": "living room",
-        "explanation": "电视（TV）通常在客厅。"
+        "answer": "works",
+        "explanation": "第三人称单数 My father 后动词加 s：works。"
       },
       {
         "id": 15,
         "type": "choice",
         "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "The ______ is on the table. Speak 'Hello'.",
+        "difficulty": 2,
+        "knowledge_point": "青少年帮助社区的表达",
+        "question": "年轻人帮助社区的方式不包括（ ）。",
         "options": [
-          "bed",
-          "phone",
-          "fridge",
-          "sofa"
+          "helping old people",
+          "planting trees",
+          "littering in the park",
+          "cleaning the street"
         ],
-        "answer": "phone",
-        "explanation": "根据语境说 Hello 判定是电话（phone）。"
+        "answer": "littering in the park",
+        "explanation": "乱扔垃圾（littering）不是帮助社区，而是破坏环境。"
       },
       {
         "id": 16,
-        "type": "fill_blank_text",
+        "type": "choice",
         "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "居室名称词汇",
-        "question": "Go to the ______ . Have a nap.",
-        "options": [],
-        "answer": "bedroom",
-        "explanation": "小睡在卧室。"
+        "difficulty": 3,
+        "knowledge_point": "一般现在时第三人称单数",
+        "question": "下面哪句是正确的？（ ）",
+        "options": [
+          "Tom help his mum at home.",
+          "Tom helps his mum at home.",
+          "Tom helping his mum.",
+          "Tom help at home."
+        ],
+        "answer": "Tom helps his mum at home.",
+        "explanation": "第三人称单数 Tom 后动词加 s：helps。"
       },
       {
         "id": 17,
-        "type": "fill_blank_text",
+        "type": "choice",
         "score": 5,
         "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "Is your father in the study? Yes, he ______ .",
-        "options": [],
-        "answer": "is",
-        "explanation": "肯定回答用 is。"
+        "knowledge_point": "社区职业词汇",
+        "question": "在社区门口保护大家安全的是（ ）。",
+        "options": [
+          "police officer",
+          "cook",
+          "artist",
+          "singer"
+        ],
+        "answer": "police officer",
+        "explanation": "警察（police officer）维护治安。"
       },
       {
         "id": 18,
-        "type": "fill_blank_text",
+        "type": "choice",
         "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "The ______ is in the kitchen. It has milk.",
-        "options": [],
-        "answer": "fridge",
-        "explanation": "厨房里装牛奶的电器是冰箱。"
+        "difficulty": 2,
+        "knowledge_point": "询问职业的句型",
+        "question": "\"What jobs are important in a community?\" 是在问（ ）。",
+        "options": [
+          "社区里什么工作重要",
+          "社区在哪里",
+          "社区有多大",
+          "社区有什么活动"
+        ],
+        "answer": "社区里什么工作重要",
+        "explanation": "What jobs are important...? 什么工作重要？"
       },
       {
         "id": 19,
-        "type": "fill_blank_text",
+        "type": "fill_blank",
         "score": 5,
-        "difficulty": 3,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "______ are the keys? They are on the fridge.",
+        "difficulty": 1,
+        "knowledge_point": "社区职业词汇",
+        "question": "写出\"教师\"的英文单词：______。",
         "options": [],
-        "answer": "where",
-        "explanation": "询问位置用 where。"
+        "answer": "teacher",
+        "explanation": "teacher 教师。"
       },
       {
         "id": 20,
-        "type": "matching",
+        "type": "fill_blank",
         "score": 5,
         "difficulty": 2,
-        "knowledge_point": "居室名称词汇",
-        "question": "匹配房间与相应的活动：",
-        "options": [
-          "living room",
-          "kitchen",
-          "bathroom",
-          "bedroom",
-          "make a salad",
-          "watch TV",
-          "have a nap",
-          "take a shower"
-        ],
-        "answer": "A-2,B-1,C-4,D-3",
-        "explanation": "A客厅观影，B厨房做饭，C浴室洗澡，D卧室睡觉。"
+        "knowledge_point": "青少年帮助社区的表达",
+        "question": "I can help by ______ (clean) the street. 用所给词的正确形式填空。",
+        "options": [],
+        "answer": "cleaning",
+        "explanation": "help by + v-ing：cleaning。"
       },
       {
         "id": 21,
-        "type": "matching",
+        "type": "fill_blank",
         "score": 5,
-        "difficulty": 1,
-        "knowledge_point": "家具词汇",
-        "question": "英汉连连看：",
-        "options": [
-          "study",
-          "fridge",
-          "table",
-          "phone",
-          "冰箱",
-          "电话",
-          "书房",
-          "桌子"
-        ],
-        "answer": "A-3,B-1,C-4,D-2",
-        "explanation": "study-书房, fridge-冰箱, table-桌子, phone-电话。"
+        "difficulty": 2,
+        "knowledge_point": "一般现在时第三人称单数",
+        "question": "My aunt ______ (work) in a hospital. 用所给词的正确形式填空。",
+        "options": [],
+        "answer": "works",
+        "explanation": "第三人称单数 aunt，动词加 s：works。"
       },
       {
         "id": 22,
-        "type": "word_order",
+        "type": "choice",
         "score": 5,
         "difficulty": 2,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "连词成句（注意第一个字母大写）：",
+        "knowledge_point": "社区职业词汇",
+        "question": "在学校门口指挥交通、保护同学安全的是（ ）。",
         "options": [
-          "my",
-          "Where",
-          "keys?",
-          "are"
+          "police officer",
+          "cook",
+          "singer",
+          "artist"
         ],
-        "answer": "Where,are,my,keys?",
-        "explanation": "特殊疑问句：疑问词 + are + 物品。"
+        "answer": "police officer",
+        "explanation": "警察在学校门口护学，指挥交通保护安全。"
       },
       {
         "id": 23,
-        "type": "word_order",
+        "type": "choice",
         "score": 5,
         "difficulty": 3,
-        "knowledge_point": "一般疑问句确认位置",
-        "question": "连词成句：",
+        "knowledge_point": "青少年帮助社区的表达",
+        "question": "社区组织植树活动，你可以说（ ）。",
         "options": [
-          "They",
-          "are",
-          "the",
-          "desk.",
-          "near"
+          "I can help plant trees.",
+          "I can't help.",
+          "It's boring.",
+          "Let's go home."
         ],
-        "answer": "They,are,near,the,desk.",
-        "explanation": "陈述句：主语 + are + 介词短语。"
+        "answer": "I can help plant trees.",
+        "explanation": "积极参与社区活动：我可以帮忙植树。"
       }
     ]
   },
   "knowledge_summary": [
     {
-      "point": "居室与家具词汇",
-      "core_concept": "常见房屋布局及主要家电家具的名称",
-      "key_formula": "Go to the [房间]. [动作]. (如: Go to the kitchen. Make a salad.)",
-      "common_mistakes": [
-        "混淆 study (书房) 与 bedroom (卧室)",
-        "fridge 和 kitchen 的拼写错误"
-      ],
-      "tips": "可以通过房间的功能来记忆，如 bed 在 bedroom，bath 在 bathroom。"
+      "point": "社区职业词汇",
+      "core_concept": "掌握常见职业词汇：doctor, nurse, teacher, police officer, firefighter, shop assistant, driver。",
+      "key_formula": "",
+      "common_mistakes": [],
+      "tips": ""
     },
     {
-      "point": "位置确认句型",
-      "core_concept": "使用一般疑问句来询问并确认人或物的位置",
-      "key_formula": "Is + 单数主语 + 地点? -> Yes, he/she/it is. / No, he/she/it isn't. | Are + 复数主语 + 地点? -> Yes, they are. / No, they aren't.",
-      "common_mistakes": [
-        "问句主语是复数 keys，却用 Is 开头",
-        "回答时人称代词 he/she/it/they 混淆"
-      ],
-      "tips": "看主语的数量，单数用 is，复数用 are。"
+      "point": "询问职业的句型",
+      "core_concept": "掌握 What's his/her job? He/She is a ... 询问和回答职业。",
+      "key_formula": "",
+      "common_mistakes": [],
+      "tips": ""
     },
     {
-      "point": "字母 u 的发音规律",
-      "core_concept": "字母 u 在开音节（u-e）和闭音节中的发音区别",
-      "key_formula": "u-e 结构发 /juː/ (use, cute, tube); 辅+u+辅 结构发 /ʌ/ (bus, duck, cup)",
-      "common_mistakes": [
-        "误将 duck 读成 / djuːk /",
-        "不理解 e 结尾不发音对前面元音的影响"
-      ],
-      "tips": "记住 'u-e' 结构里 u 发其字母本身的音 /juː/。"
+      "point": "青少年帮助社区的表达",
+      "core_concept": "掌握 I can help by ... / We can ... 表达年轻人能为社区做的事（如帮助老人、捡垃圾、浇花）。",
+      "key_formula": "",
+      "common_mistakes": [],
+      "tips": ""
+    },
+    {
+      "point": "一般现在时第三人称单数",
+      "core_concept": "初步掌握 He/She works/helps ... 中动词的第三人称单数形式。",
+      "key_formula": "",
+      "common_mistakes": [],
+      "tips": ""
+    },
+    {
+      "point": "Project：制作校园帮助者海报",
+      "core_concept": "能用英语介绍学校里的帮助者及其工作，完成\"Make a poster of your school helpers\"项目。",
+      "key_formula": "",
+      "common_mistakes": [],
+      "tips": ""
     }
   ]
 }
