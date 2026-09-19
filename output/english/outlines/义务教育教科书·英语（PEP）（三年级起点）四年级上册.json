@@ -3,79 +3,101 @@
   "units": [
     {
       "unit_number": 1,
-      "title": "My classroom",
+      "title": "Unit 1 Helping at home",
       "knowledge_points": [
         {
-          "name": "教室物品词汇认读",
-          "description": "识别并正确书写classroom, window, door, picture, light, blackboard等教室常见物品单词。",
+          "name": "家庭成员与家务词汇",
+          "description": "掌握家庭成员称呼（mum, dad, grandma, grandpa, brother, sister）和家务相关词汇（help, cook, clean, wash, sweep, tidy, set the table 等）。",
           "difficulty": 1,
           "question_types": [
-            "填空",
-            "连线/匹配",
-            "选择"
+            "词汇选择",
+            "填空"
           ]
         },
         {
-          "name": "询问及描述物品方位",
-          "description": "运用句型Where is it?及其回答It’s near/in/on/under...描述物品位置。",
-          "difficulty": 3,
-          "question_types": [
-            "选择",
-            "填空",
-            "操作题"
-          ]
-        },
-        {
-          "name": "课堂指令动作执行",
-          "description": "听懂并执行Open the door, Turn on the light等祈使句指令。",
+          "name": "询问和表达家庭差异",
+          "description": "能听懂、会说 How are families different? 并介绍自己家庭与别人家庭的不同（如有没有兄弟姐妹、宠物等）。",
           "difficulty": 2,
           "question_types": [
-            "操作题",
-            "连线/匹配"
+            "情景选择",
+            "判断"
           ]
         },
         {
-          "name": "元音字母a在开音节中的发音",
-          "description": "掌握字母a在“辅音+a+辅音+e”结构中发/eɪ/的规律，并能辨析闭音节发音。",
+          "name": "主动提供帮助的句型",
+          "description": "掌握 Can I help you? / I can help you. / Let me help you. 等主动帮助家人的句型，并能做出回应。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "填空"
+          ]
+        },
+        {
+          "name": "祈使句与现在进行时初步",
+          "description": "能使用祈使句（Clean the room.）和 I'm + v-ing 表达正在做的事情。",
           "difficulty": 3,
           "question_types": [
-            "规律探索",
-            "选择",
+            "情景选择",
             "判断"
+          ]
+        },
+        {
+          "name": "Project：制作幸福家庭海报",
+          "description": "能用英语描述家人和家务分工，完成\"Make a poster of a happy family\"项目，并进行简单展示。",
+          "difficulty": 3,
+          "question_types": [
+            "情景选择",
+            "填空"
           ]
         }
       ]
     },
     {
       "unit_number": 2,
-      "title": "My schoolbag",
+      "title": "Unit 2 My friends",
       "knowledge_points": [
         {
-          "name": "学习用品及书籍词汇",
-          "description": "掌握schoolbag, maths book, English book, storybook等词汇的听说认读。",
+          "name": "朋友特征词汇",
+          "description": "掌握描述朋友的词汇：tall, short, thin, strong, quiet, friendly, kind, funny 等。",
           "difficulty": 1,
           "question_types": [
-            "填空",
-            "连线/匹配"
+            "词汇选择",
+            "填空"
           ]
         },
         {
-          "name": "询问书包内物品",
-          "description": "熟练运用What’s in your schoolbag?进行问答，并能描述物品颜色。",
-          "difficulty": 3,
+          "name": "介绍朋友的句型",
+          "description": "掌握 He/She is ... / He/She has ... / His/Her name is ... 等介绍朋友的句型。",
+          "difficulty": 2,
           "question_types": [
-            "填空",
-            "应用题",
-            "选择"
+            "情景选择",
+            "判断"
           ]
         },
         {
-          "name": "元音字母i在开音节中的发音",
-          "description": "辨析字母i在开音节中发/aɪ/与闭音节中发/ɪ/的区别，如like vs big。",
+          "name": "如何选择朋友",
+          "description": "能围绕 How do we choose our friends? 表达自己的交友标准（如 kind, friendly, helpful）。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "填空"
+          ]
+        },
+        {
+          "name": "物主代词 his/her/their",
+          "description": "能正确使用 his, her, their 描述朋友的特征和物品。",
           "difficulty": 3,
           "question_types": [
-            "规律探索",
-            "判断",
+            "选择",
+            "填空"
+          ]
+        },
+        {
+          "name": "Project：制作朋友之书",
+          "description": "能用英语写一段介绍朋友的小短文，完成\"Make a book about your friend\"项目。",
+          "difficulty": 3,
+          "question_types": [
+            "情景选择",
             "填空"
           ]
         }
@@ -83,138 +105,204 @@
     },
     {
       "unit_number": 3,
-      "title": "My friends",
+      "title": "Unit 3 Places we live in",
       "knowledge_points": [
         {
-          "name": "人物外貌与性格描述",
-          "description": "使用tall, strong, friendly, quiet, glasses等词汇描述人物特征。",
-          "difficulty": 2,
+          "name": "社区场所词汇",
+          "description": "掌握社区场所词汇：park, school, shop, hospital, library, playground, bus stop 等。",
+          "difficulty": 1,
           "question_types": [
-            "填空",
-            "连线/匹配",
-            "选择"
-          ]
-        },
-        {
-          "name": "询问他人身份与特征",
-          "description": "运用Who's he/she?及He/She has...句型进行人物识别与介绍。",
-          "difficulty": 3,
-          "question_types": [
-            "选择",
-            "应用题",
+            "词汇选择",
             "填空"
           ]
         },
         {
-          "name": "元音字母o在开音节中的发音",
-          "description": "掌握字母o在o-e结构中发/əʊ/的规律，如nose, note。",
+          "name": "描述社区环境的句型",
+          "description": "掌握 There is/are ... 句型描述社区里有什么，并能回答 What can we see in a community? 和 What do people do in a community?。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "判断"
+          ]
+        },
+        {
+          "name": "方位介词",
+          "description": "掌握 in, on, near, next to, behind, in front of 等方位介词描述场所位置。",
+          "difficulty": 2,
+          "question_types": [
+            "选择",
+            "填空"
+          ]
+        },
+        {
+          "name": "社区职业与活动",
+          "description": "了解社区中人们的活动（play, work, shop, exercise）和职业（doctor, teacher, shopkeeper）。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "判断"
+          ]
+        },
+        {
+          "name": "Project：制作梦想社区模型",
+          "description": "能用英语规划并描述自己的梦想社区，完成\"Make a dream community model\"项目。",
           "difficulty": 3,
           "question_types": [
-            "规律探索",
-            "判断"
+            "情景选择",
+            "填空"
           ]
         }
       ]
     },
     {
       "unit_number": 4,
-      "title": "My home",
+      "title": "Unit 4 Helping in the community",
       "knowledge_points": [
         {
-          "name": "居室名称与家具词汇",
-          "description": "听说认读bedroom, living room, study, kitchen, bathroom及bed, fridge等物品。",
+          "name": "社区职业词汇",
+          "description": "掌握常见职业词汇：doctor, nurse, teacher, police officer, firefighter, shop assistant, driver。",
           "difficulty": 1,
           "question_types": [
-            "填空",
-            "连线/匹配"
-          ]
-        },
-        {
-          "name": "一般疑问句确认位置",
-          "description": "运用Is she in the...? Yes, she is./No, she isn't.询问并确认人或物的位置。",
-          "difficulty": 3,
-          "question_types": [
-            "选择",
-            "应用题",
+            "词汇选择",
             "填空"
           ]
         },
         {
-          "name": "元音字母u在开音节中的发音",
-          "description": "掌握u-e结构发/juː/的规律，并能区分duck与use的发音差异。",
+          "name": "询问职业的句型",
+          "description": "掌握 What's his/her job? He/She is a ... 询问和回答职业。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "判断"
+          ]
+        },
+        {
+          "name": "青少年帮助社区的表达",
+          "description": "掌握 I can help by ... / We can ... 表达年轻人能为社区做的事（如帮助老人、捡垃圾、浇花）。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "填空"
+          ]
+        },
+        {
+          "name": "一般现在时第三人称单数",
+          "description": "初步掌握 He/She works/helps ... 中动词的第三人称单数形式。",
           "difficulty": 3,
           "question_types": [
-            "规律探索",
+            "选择",
             "判断"
+          ]
+        },
+        {
+          "name": "Project：制作校园帮助者海报",
+          "description": "能用英语介绍学校里的帮助者及其工作，完成\"Make a poster of your school helpers\"项目。",
+          "difficulty": 3,
+          "question_types": [
+            "情景选择",
+            "填空"
           ]
         }
       ]
     },
     {
       "unit_number": 5,
-      "title": "Dinner's ready",
+      "title": "Unit 5 The weather and us",
       "knowledge_points": [
         {
-          "name": "食物与餐具词汇",
-          "description": "听说认读beef, soup, vegetables及chopsticks, bowl, fork, knife等单词。",
+          "name": "天气词汇",
+          "description": "掌握天气词汇：sunny, rainy, cloudy, windy, snowy, hot, cold, warm, cool。",
           "difficulty": 1,
           "question_types": [
-            "填空",
-            "连线/匹配"
-          ]
-        },
-        {
-          "name": "点餐与就餐礼貌表达",
-          "description": "运用What would you like? I'd like...及Help yourself等句型进行情景交际。",
-          "difficulty": 3,
-          "question_types": [
-            "选择",
-            "应用题",
+            "词汇选择",
             "填空"
           ]
         },
         {
-          "name": "字母e在单词结尾的发音规律",
-          "description": "掌握字母e在me, he, she, we等单词中发长元音/i:/的规律。",
+          "name": "询问天气的句型",
+          "description": "掌握 What's the weather like? It's ... 询问和描述天气。",
           "difficulty": 2,
           "question_types": [
-            "规律探索",
+            "情景选择",
             "判断"
+          ]
+        },
+        {
+          "name": "不同天气的活动",
+          "description": "能表达不同天气下做什么：We can ... in sunny weather. / I wear ... when it's rainy. 等。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "填空"
+          ]
+        },
+        {
+          "name": "天气与生活的关联",
+          "description": "理解天气对穿衣、出行、活动的影响，能根据天气做出合理选择。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "判断"
+          ]
+        },
+        {
+          "name": "Project：制作恶劣天气提醒",
+          "description": "能用英语制作恶劣天气（台风、暴雨、高温）的安全提醒，完成\"Make a bad weather reminder\"项目。",
+          "difficulty": 3,
+          "question_types": [
+            "情景选择",
+            "填空"
           ]
         }
       ]
     },
     {
       "unit_number": 6,
-      "title": "Meet my family!",
+      "title": "Unit 6 Changing for the seasons",
       "knowledge_points": [
         {
-          "name": "家庭成员与职业名称",
-          "description": "掌握parents, uncle, aunt及doctor, nurse, driver, farmer等职业词汇。",
+          "name": "季节与服装词汇",
+          "description": "掌握四季词汇（spring, summer, autumn, winter）和服装词汇（coat, sweater, T-shirt, dress, shorts, scarf, gloves）。",
           "difficulty": 1,
           "question_types": [
-            "填空",
-            "连线/匹配"
-          ]
-        },
-        {
-          "name": "询问家庭人数与职业",
-          "description": "运用How many people are there...?及What's his/her job?进行信息交流。",
-          "difficulty": 3,
-          "question_types": [
-            "应用题",
-            "选择",
+            "词汇选择",
             "填空"
           ]
         },
         {
-          "name": "五大元音字母发音综合辨析",
-          "description": "综合区分a, e, i, o, u在开闭音节中的发音规律，能按发音归类单词。",
-          "difficulty": 4,
+          "name": "不同季节穿着的表达",
+          "description": "掌握 We wear ... in ... / I put on ... 等表达不同季节的穿着。",
+          "difficulty": 2,
           "question_types": [
-            "规律探索",
-            "排序/比较",
+            "情景选择",
             "判断"
+          ]
+        },
+        {
+          "name": "不同季节活动的表达",
+          "description": "能表达不同季节的活动：We go swimming in summer. / We make a snowman in winter. 等。",
+          "difficulty": 2,
+          "question_types": [
+            "情景选择",
+            "填空"
+          ]
+        },
+        {
+          "name": "一般现在时的综合运用",
+          "description": "综合运用一般现在时描述季节、天气、穿着和活动。",
+          "difficulty": 3,
+          "question_types": [
+            "选择",
+            "判断"
+          ]
+        },
+        {
+          "name": "Project：制作旅行卡",
+          "description": "能用英语推荐季节和旅行目的地，完成\"Make a travel card\"项目。",
+          "difficulty": 3,
+          "question_types": [
+            "情景选择",
+            "填空"
           ]
         }
       ]
